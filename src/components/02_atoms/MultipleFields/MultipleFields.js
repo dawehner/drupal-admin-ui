@@ -37,6 +37,12 @@ class MultipleFields extends Component {
     this.props.onChange([...this.props.value, '']);
   };
 
+  changeItem = index => value => {
+    const newValue = [...this.props.value];
+    newValue[index] = value;
+    this.props.onChange(newValue);
+  };
+
   render = () => (
     <div>
       <FormLabel component="legend">{this.props.label}</FormLabel>
@@ -47,6 +53,7 @@ class MultipleFields extends Component {
             {React.createElement(this.props.component.component, {
               ...this.props,
               value,
+              onChange: this.changeItem(index),
             })}
             <Button
               mini
